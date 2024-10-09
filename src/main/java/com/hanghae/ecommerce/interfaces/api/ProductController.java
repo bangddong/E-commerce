@@ -1,6 +1,10 @@
 package com.hanghae.ecommerce.interfaces.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +21,28 @@ public class ProductController {
 
     @GetMapping
     @Operation(summary = "상품 목록 조회")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "상품 목록 조회 성공",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = """
+                [
+                  {
+                    "id": 1,
+                    "name": "Product A",
+                    "price": 1000,
+                    "stock": 50
+                  },
+                  {
+                    "id": 2,
+                    "name": "Product B",
+                    "price": 2000,
+                    "stock": 30
+                  }
+                ]
+            """))),
+            @ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content()),
+            @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content())
+    })
     public ResponseEntity<List<Map<String, Object>>> getProducts() {
         List<Map<String, Object>> products = new ArrayList<>();
 
@@ -40,6 +66,21 @@ public class ProductController {
 
     @GetMapping("/top-sellers")
     @Operation(summary = "판매량 상위 상품 조회")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "판매량 상위 상품 조회 성공",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = """
+                [
+                  {
+                    "id": 1,
+                    "name": "Product A",
+                    "sold": 100
+                  }
+                ]
+            """))),
+            @ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content()),
+            @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content())
+    })
     public ResponseEntity<List<Map<String, Object>>> getTopSellers() {
         List<Map<String, Object>> topSellers = new ArrayList<>();
 
