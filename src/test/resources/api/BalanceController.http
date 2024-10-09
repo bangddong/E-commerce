@@ -1,0 +1,14 @@
+@userId = 1
+
+### 사용자 잔액 조회
+GET http://localhost:8080/balance/{{userId}}
+
+### 사용자 잔액 충전
+POST http://localhost:8080/balance/charge
+accept: application/json
+content-type: application/json
+
+{
+  "userId": {{userId}},
+  "amount": 100
+}
