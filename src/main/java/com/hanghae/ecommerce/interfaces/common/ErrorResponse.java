@@ -1,7 +1,7 @@
 package com.hanghae.ecommerce.interfaces.common;
 
 public record ErrorResponse(
-        String code,
+        int code,
         String message
 ) {
 }
