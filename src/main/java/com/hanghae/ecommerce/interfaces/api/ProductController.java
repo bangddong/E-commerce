@@ -15,9 +15,6 @@ import java.util.Map;
 @RequestMapping("/products")
 public class ProductController {
 
-    /**
-     * 상품 목록 조회
-     */
     @GetMapping
     @Operation(summary = "상품 목록 조회")
     public ResponseEntity<List<Map<String, Object>>> getProducts() {
@@ -41,9 +38,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    /**
-     * 판매량 상위 상품 조회
-     */
     @GetMapping("/top-sellers")
     @Operation(summary = "판매량 상위 상품 조회")
     public ResponseEntity<List<Map<String, Object>>> getTopSellers() {

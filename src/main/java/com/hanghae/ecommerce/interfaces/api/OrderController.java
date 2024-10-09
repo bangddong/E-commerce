@@ -14,9 +14,6 @@ import java.util.Map;
 @RequestMapping("/order")
 public class OrderController {
 
-    /**
-     * 주문 생성
-     */
     @PostMapping
     @Operation(summary = "주문 생성")
     public ResponseEntity<Map<String, String>> createOrder(@RequestBody Map<String, Object> orderRequest) {
