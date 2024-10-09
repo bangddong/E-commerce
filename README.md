@@ -145,3 +145,13 @@ ProductController -->> User: 응답 (ex: [상품1, 상품2, 상품3, 상품4, �
 
 ## ERD
 ![image](https://github.com/user-attachments/assets/7a47d5ab-f6e9-4f6c-9ba8-a8d360729991)
+
+## 패키지 구조 및 기술 스택
+### 패키지 구조
+현재 패키지 구조와 동일함.  
+
+### 기술 스택
+DB: H2 Database  
+ORM: Spring Data JPA  
+API: Spring Web  
+테스트: JUnit5, Mockito
