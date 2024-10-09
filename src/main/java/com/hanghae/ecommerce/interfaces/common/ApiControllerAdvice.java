@@ -12,17 +12,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 class ApiControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleBadRequest(IllegalArgumentException e) {
+    public ResponseEntity<ErrorResponse> handleBadRequest(IllegalArgumentException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(400, e.getMessage()));
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleNotFound(ResourceNotFoundException e) {
+    public ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(404, e.getMessage()));
     }
 
     @ExceptionHandler(ConcurrencyException.class)
-    public ResponseEntity<?> handleConcurrency(ConcurrencyException e) {
+    public ResponseEntity<ErrorResponse> handleConcurrency(ConcurrencyException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(409, e.getMessage()));
     }
 
