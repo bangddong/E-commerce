@@ -142,3 +142,6 @@ DB -->> ProductService: 상위 5개 상품 데이터 반환
 ProductService -->> ProductController: 상위 판매 상품 정보 반환
 ProductController -->> User: 응답 (ex: [상품1, 상품2, 상품3, 상품4, 상품5])
 ```
+
+## ERD
+![image](https://github.com/user-attachments/assets/7a47d5ab-f6e9-4f6c-9ba8-a8d360729991)
