@@ -1,4 +1,4 @@
-package com.hanghae.ecommerce.interfaces.api;
+package com.hanghae.ecommerce.interfaces.product;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

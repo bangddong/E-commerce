@@ -1,10 +1,10 @@
 @userId = 1
 
 ### 사용자 잔액 조회
-GET http://localhost:8080/balance/{{userId}}
+GET http://localhost:8080/users/{{userId}}/balance
 
 ### 사용자 잔액 충전
-POST http://localhost:8080/balance/charge
+POST http://localhost:8080/users/{{userId}}/balance
 accept: application/json
 content-type: application/json
 
