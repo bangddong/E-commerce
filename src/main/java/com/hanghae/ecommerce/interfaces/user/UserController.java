@@ -1,4 +1,4 @@
-package com.hanghae.ecommerce.interfaces.api;
+package com.hanghae.ecommerce.interfaces.user;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/balance")
-public class BalanceController {
+@RequestMapping("/users")
+public class UserController {
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{userId}/balance")
     @Operation(summary = "사용자 잔액 조회")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "잔액 조회 성공",
@@ -38,7 +38,7 @@ public class BalanceController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/charge")
+    @PostMapping("/{userId}/balance")
     @Operation(summary = "사용자 잔액 충전")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "충전 성공",
@@ -54,6 +54,7 @@ public class BalanceController {
             @ApiResponse(responseCode = "409", description = "동시성 충돌", content = @Content()),
             @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content())
     })
+
     public ResponseEntity<Map<String, Object>> chargeUserBalance(@RequestBody Map<String, Object> request) {
         String userId = String.valueOf(request.get("userId"));
         Integer amount = (Integer) request.get("amount");

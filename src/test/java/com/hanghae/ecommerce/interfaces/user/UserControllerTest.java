@@ -1,4 +1,4 @@
-package com.hanghae.ecommerce.interfaces.api;
+package com.hanghae.ecommerce.interfaces.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BalanceController.class)
-class BalanceControllerTest {
+@WebMvcTest(UserController.class)
+class UserControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -22,7 +22,7 @@ class BalanceControllerTest {
 
         // When & Then
         mvc.perform(
-                get("/balance/1")
+                get("/users/1/balance")
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.userId").value("1"))
@@ -35,7 +35,7 @@ class BalanceControllerTest {
 
         // When & Then
         mvc.perform(
-                post("/balance/charge")
+                post("/users/1/balance")
                         .content("{\"userId\":\"1\", \"amount\":1000}")
                         .contentType("application/json")
         )
