@@ -1,0 +1,6 @@
+logging:
+  config: classpath:logback-local.xml
+springdoc:
+  cache:
+    disabled: true
+  override-with-generic-response: false
