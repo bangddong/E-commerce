@@ -5,7 +5,6 @@ import com.hanghae.ecommerce.domain.product.stock.ProductStock;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +24,7 @@ public class Product extends AbstractEntity {
 	private String name;
 	private Long price;
 
-	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
 	private ProductStock productStock;
 
 }
