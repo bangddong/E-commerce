@@ -24,4 +24,20 @@ public class UserDto {
             return new ChargeResponse(userId, balance);
         }
     }
+
+    public record AddCartRequest(
+            Long productId,
+            Long quantity
+    ) {
+    }
+
+    public record CartResponse(
+            String userId,
+            Long balance
+    ) {
+        public static CartResponse of(String userId, Long balance) {
+            return new CartResponse(userId, balance);
+        }
+    }
+
 }
