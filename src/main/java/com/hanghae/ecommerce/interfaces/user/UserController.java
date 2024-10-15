@@ -20,35 +20,23 @@ public class UserController {
     private final UserFacade userFacade;
 
     @GetMapping("/{userId}/balance")
-    public CommonResponse<UserDto.BalanceResponse> getUserBalance(@PathVariable String userId) {
-        var response = UserDto.BalanceResponse.of(userId, 10000L);
+    public CommonResponse<UserDto.BalanceResponse> getUserBalance(@PathVariable Long userId) {
+        var userInfo = userFacade.getBalance(userId);
+        var response = UserDto.BalanceResponse.from(userInfo);
 
         return CommonResponse.success(response);
     }
 
     @PostMapping("/{userId}/balance")
-    public CommonResponse<UserDto.ChargeResponse> chargeUserBalance(
+    public CommonResponse<UserDto.BalanceResponse> chargeUserBalance(
             @RequestBody UserDto.ChargeRequest request,
-            @PathVariable String userId
+            @PathVariable Long userId
     ) {
-        var response = UserDto.ChargeResponse.of(userId, 10000 + request.amount());
+        var userCommand = UserDtoMapper.toCommand(request);
+        var userInfo = userFacade.chargeBalance(userCommand, userId);
+        var response = UserDto.BalanceResponse.from(userInfo);
 
         return CommonResponse.success(response);
-    }
-
-    @GetMapping("/{userId}/cart")
-    public CommonResponse<UserDto.CartResponse> getCartList(@PathVariable String userId) {
-        var response = UserDto.CartResponse.of(userId, 10000L);
-
-        return CommonResponse.success(response);
-    }
-
-    @PostMapping("/{userId}/cart")
-    public CommonResponse<String> addCart(
-        @RequestBody UserDto.AddCartRequest request,
-        @PathVariable String userId) {
-
-        return CommonResponse.success("OK");
     }
 
 }

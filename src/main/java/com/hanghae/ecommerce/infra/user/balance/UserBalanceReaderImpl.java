@@ -17,7 +17,7 @@ public class UserBalanceReaderImpl implements UserBalanceReader {
 	@Override
 	public UserBalance getBalance(Long userId) {
 		return userBalanceRepository.findById(userId)
-			.orElseThrow(EntityNotFoundException::new);
+			.orElseThrow(() -> new EntityNotFoundException("유효하지 않는 UserId입니다."));
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.hanghae.ecommerce.domain.user.balance;
 
+import com.hanghae.ecommerce.common.exception.InvalidParamException;
 import com.hanghae.ecommerce.domain.AbstractEntity;
 import com.hanghae.ecommerce.domain.user.User;
 
@@ -11,10 +12,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "user_balances")
+@NoArgsConstructor
+@Table(name = "user_balance")
 public class UserBalance extends AbstractEntity {
 
 	@Id
@@ -25,6 +28,12 @@ public class UserBalance extends AbstractEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	private int balance;
+	private Long balance;
+
+	public void updateBalance(Long balance) {
+		if (balance == null) throw new InvalidParamException("UserBalance.balance");
+
+		this.balance = balance;
+	}
 
 }

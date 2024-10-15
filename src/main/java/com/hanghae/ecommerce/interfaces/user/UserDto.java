@@ -1,5 +1,7 @@
 package com.hanghae.ecommerce.interfaces.user;
 
+import com.hanghae.ecommerce.domain.user.UserInfo;
+
 public class UserDto {
 
     public record ChargeRequest(
@@ -8,35 +10,11 @@ public class UserDto {
     }
 
     public record BalanceResponse(
-            String userId,
+            Long userId,
             Long balance
     ) {
-        public static BalanceResponse of(String userId, Long balance) {
-            return new BalanceResponse(userId, balance);
-        }
-    }
-
-    public record ChargeResponse(
-            String userId,
-            Long balance
-    ) {
-        public static ChargeResponse of(String userId, Long balance) {
-            return new ChargeResponse(userId, balance);
-        }
-    }
-
-    public record AddCartRequest(
-            Long productId,
-            Long quantity
-    ) {
-    }
-
-    public record CartResponse(
-            String userId,
-            Long balance
-    ) {
-        public static CartResponse of(String userId, Long balance) {
-            return new CartResponse(userId, balance);
+        public static BalanceResponse from(UserInfo userInfo) {
+            return new BalanceResponse(userInfo.userId(), userInfo.balance());
         }
     }
 
