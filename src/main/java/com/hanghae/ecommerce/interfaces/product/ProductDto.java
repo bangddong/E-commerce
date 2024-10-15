@@ -1,15 +1,16 @@
 package com.hanghae.ecommerce.interfaces.product;
 
+import java.util.List;
+
+import com.hanghae.ecommerce.domain.product.ProductInfo;
+
 public class ProductDto {
 
     public record ProductResponse(
-            Long id,
-            String name,
-            Integer price,
-            Integer stock
+            List<ProductInfo> products
     ) {
-        public static ProductResponse of(Long id, String name, Integer price, Integer stock) {
-            return new ProductResponse(id, name, price, stock);
+        public static ProductResponse of(List<ProductInfo> productInfoList) {
+            return new ProductResponse(productInfoList);
         }
     }
 
