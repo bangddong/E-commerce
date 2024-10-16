@@ -8,4 +8,6 @@ public interface ProductReader {
 
 	Product getProduct(Long productId);
 
+	List<Product> getTopSelling();
+
 }

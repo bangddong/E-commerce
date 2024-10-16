@@ -14,12 +14,15 @@ public class UserFacade {
 
 	private final UserService userService;
 
-	public UserInfo getBalance(Long userId) {
+	public UserInfo.Balance getBalance(Long userId) {
 		return userService.getBalance(userId);
 	}
 
-	public UserInfo chargeBalance(UserCommand.ChargeRequest request, Long userId) {
-		return userService.chargeBalance(request, userId);
+	public UserInfo.Balance chargeBalance(UserCommand.ChargeRequest command, Long userId) {
+		var userBalance = userService.getBalance(userId);
+		var updateAmount = userBalance.balance() + command.amount();
+
+		return userService.chargeBalance(userId, updateAmount);
 	}
 
 }

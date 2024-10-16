@@ -1,13 +1,22 @@
 package com.hanghae.ecommerce.domain.user;
 
-public record UserInfo(
-	Long userId,
-	Long balance
-) {
-	public static UserInfo from(User user) {
-		return new UserInfo(
-			user.getId(),
-			user.getUserBalance().getBalance()
-		);
+import com.hanghae.ecommerce.domain.user.balance.UserBalance;
+
+public class UserInfo {
+
+	public record Main(Long id) {
+		public static UserInfo.Main from(User user) {
+			return new UserInfo.Main(user.getId());
+		}
 	}
+
+	public record Balance(Long id, Long balance) {
+		public static Balance from(UserBalance userBalance) {
+			return new Balance(
+				userBalance.getId(),
+				userBalance.getBalance()
+			);
+		}
+	}
+
 }

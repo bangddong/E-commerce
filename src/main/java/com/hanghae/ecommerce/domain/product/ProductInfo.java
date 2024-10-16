@@ -4,7 +4,7 @@ public record ProductInfo(
 	Long productId,
 	String productName,
 	Long productPrice,
-	int productStock
+	Long productStock
 ) {
 	public static ProductInfo from(Product product) {
 		return new ProductInfo(

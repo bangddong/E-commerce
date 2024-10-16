@@ -2,8 +2,10 @@ package com.hanghae.ecommerce.domain.user;
 
 public interface UserService {
 
-	UserInfo getBalance(Long userId);
+	UserInfo.Balance getBalance(Long userId);
 
-	UserInfo chargeBalance(UserCommand.ChargeRequest request, Long userId);
+	UserInfo.Balance chargeBalance(Long userId, Long amount);
+
+	UserInfo.Main getUser(Long userId);
 
 }

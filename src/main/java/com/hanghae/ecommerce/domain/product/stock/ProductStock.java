@@ -11,9 +11,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "product_stock")
 public class ProductStock extends AbstractEntity {
 
@@ -25,6 +27,13 @@ public class ProductStock extends AbstractEntity {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
-	private int stock;
+	private Long stock;
+
+	public ProductStock(Product product) {
+		if (product == null) throw new IllegalArgumentException("ProductStock.product");
+
+		this.product = product;
+		this.stock = 0L;
+	}
 
 }

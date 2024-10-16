@@ -8,4 +8,6 @@ public interface ProductService {
 
 	List<ProductInfo> getTopSelling();
 
+	ProductInfo getProduct(Long productId);
+
 }

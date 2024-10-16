@@ -4,7 +4,7 @@ public class UserCommand {
 	public record ChargeRequest(
 		Long amount
 	) {
-		public static ChargeRequest of(Long amount) {
+		public static ChargeRequest from(Long amount) {
 			return new ChargeRequest(amount);
 		}
 	}
