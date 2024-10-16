@@ -13,14 +13,4 @@ public class ProductDto {
             return new ProductResponse(productInfoList);
         }
     }
-
-    public record TopSellingResponse(
-            Long id,
-            String name,
-            Integer sold
-    ) {
-        public static TopSellingResponse of(Long id, String name, Integer sold) {
-            return new TopSellingResponse(id, name, sold);
-        }
-    }
 }

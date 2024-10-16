@@ -19,8 +19,8 @@ public class ProductFacade {
 		return productService.getProducts();
 	}
 
-	// public String getTopSelling() {
-	// 	return "getTopSelling";
-	// }
+	public List<ProductInfo> getTopSelling() {
+		return productService.getTopSelling();
+	}
 
 }

@@ -6,4 +6,6 @@ public interface ProductService {
 
 	List<ProductInfo> getProducts();
 
+	List<ProductInfo> getTopSelling();
+
 }

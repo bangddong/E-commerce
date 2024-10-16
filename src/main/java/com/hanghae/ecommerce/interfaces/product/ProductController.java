@@ -23,11 +23,12 @@ public class ProductController {
         return CommonResponse.success(response);
     }
 
-    // @GetMapping("/top-selling")
-    // public CommonResponse<ProductDto.TopSellingResponse> getTopSelling() {
-    //     var response = ProductDto.TopSellingResponse.of(1L, "Product A", 100);
-    //
-    //     return CommonResponse.success(response);
-    // }
+    @GetMapping("/top-selling")
+    public CommonResponse<ProductDto.ProductResponse> getTopSelling() {
+        var productInfos = productFacade.getTopSelling();
+        var response = ProductDto.ProductResponse.of(productInfos);
+
+        return CommonResponse.success(response);
+    }
 
 }

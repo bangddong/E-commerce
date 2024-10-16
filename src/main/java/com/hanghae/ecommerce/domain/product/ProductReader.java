@@ -6,4 +6,6 @@ public interface ProductReader {
 
 	List<Product> getProducts();
 
+	Product getProduct(Long productId);
+
 }
