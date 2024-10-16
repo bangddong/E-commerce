@@ -1,5 +1,6 @@
 package com.hanghae.ecommerce.domain.cart.item;
 
+import com.hanghae.ecommerce.common.exception.InvalidParamException;
 import com.hanghae.ecommerce.domain.AbstractEntity;
 import com.hanghae.ecommerce.domain.cart.Cart;
 import com.hanghae.ecommerce.domain.product.Product;
@@ -13,9 +14,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "cart_items")
 public class CartItem extends AbstractEntity {
 
@@ -31,6 +34,15 @@ public class CartItem extends AbstractEntity {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
-	private int quantity;
+	private Long quantity;
 
+	public CartItem(Cart cart, Product product, Long quantity) {
+		if (cart == null) throw new InvalidParamException("CartItem.cart");
+		if (product == null) throw new InvalidParamException("CartItem.product");
+		if (quantity == null) throw new InvalidParamException("CartItem.quantity");
+
+		this.cart = cart;
+		this.product = product;
+		this.quantity = quantity;
+	}
 }
