@@ -9,6 +9,8 @@ import com.hanghae.ecommerce.domain.user.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,9 +34,17 @@ public class Order extends AbstractEntity {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	private int totalAmount;
+	private Long totalAmount;
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<OrderItem> orderItems = new ArrayList<>();
+
+	@Enumerated(EnumType.STRING)
+	private Status status;
+
+	@Getter
+	public enum Status{
+		ORDER, CANCEL, COMPLETE
+	}
 
 }

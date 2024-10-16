@@ -31,7 +31,7 @@ public class OrderItem extends AbstractEntity {
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
-	private int quantity;
-	private int price;
+	private Long quantity;
+	private Long price;
 
 }

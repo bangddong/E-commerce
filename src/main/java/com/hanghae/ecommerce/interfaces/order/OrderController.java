@@ -1,20 +1,27 @@
 package com.hanghae.ecommerce.interfaces.order;
 
+import com.hanghae.ecommerce.application.order.OrderFacade;
 import com.hanghae.ecommerce.common.response.CommonResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/order")
 public class OrderController {
 
-    @PostMapping
-    public CommonResponse<OrderDto.OrderResponse> createOrder(@RequestBody OrderDto.OrderRequest orderRequest) {
-        var response = OrderDto.OrderResponse.of(1L, orderRequest.productId(), orderRequest.quantity());
+    private final OrderFacade orderFacade;
 
-        return CommonResponse.success(response);
+    @PostMapping
+    public CommonResponse<String> createOrder(@RequestBody OrderDto.CreateOrderRequest request) {
+        var command = OrderDtoMapper.toCommand(request);
+        orderFacade.createOrder(command);
+
+        return CommonResponse.success("OK");
     }
 
 }
