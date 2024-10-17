@@ -45,4 +45,10 @@ public class CartItem extends AbstractEntity {
 		this.product = product;
 		this.quantity = quantity;
 	}
+
+	public void updateQuantity(Long quantity) {
+		if (quantity == null) throw new InvalidParamException("CartItem.quantity");
+
+		this.quantity += quantity;
+	}
 }

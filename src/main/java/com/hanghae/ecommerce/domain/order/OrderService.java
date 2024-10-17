@@ -1,7 +1,9 @@
 package com.hanghae.ecommerce.domain.order;
 
+import com.hanghae.ecommerce.domain.cart.Cart;
+
 public interface OrderService {
 
-	void createOrder(OrderCommand.CreateOrderRequest command);
+	Order createOrder(Cart cart, Long totalAmount);
 
 }

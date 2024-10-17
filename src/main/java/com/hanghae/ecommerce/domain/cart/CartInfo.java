@@ -11,11 +11,13 @@ public class CartInfo {
 		Long userId,
 		List<CartItemInfo> cartItems
 	) {
-		public static CartInfo.Main of(Cart cart, List<CartItemInfo> cartItems) {
+		public static CartInfo.Main of(Cart cart) {
 			return new CartInfo.Main(
 				cart.getId(),
 				cart.getUser().getId(),
-				cartItems
+				cart.getCartItems().stream()
+					.map(CartItemInfo::from)
+					.toList()
 			);
 		}
 	}
@@ -33,6 +35,10 @@ public class CartInfo {
 				cartItem.getProduct().getName(),
 				cartItem.getQuantity()
 			);
+		}
+
+		public static CartItem from() {
+			return new CartItem();
 		}
 	}
 

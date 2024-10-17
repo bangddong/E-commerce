@@ -35,4 +35,8 @@ public class Cart extends AbstractEntity {
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<CartItem> cartItems = new ArrayList<>();
 
+	public void clearItems() {
+		this.cartItems.clear();
+	}
+
 }

@@ -1,4 +1,4 @@
-package com.hanghae.ecommerce.infra.order.item;
+package com.hanghae.ecommerce.infra.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

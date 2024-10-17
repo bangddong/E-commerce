@@ -16,6 +16,7 @@ public enum ErrorCode {
     COMMON_NOT_FOUND("존재하지 않는 요청입니다."),
     COMMON_ILLEGAL_STATUS("잘못된 상태값입니다."),
     COMMON_OUT_OF_STOCK("재고가 부족합니다."),
+    COMMON_INSUFFICIENT_BALANCE("잔액이 부족합니다."),
     ;
 
     private final String message;

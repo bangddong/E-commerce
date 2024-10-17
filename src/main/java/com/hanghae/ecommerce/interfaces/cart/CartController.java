@@ -32,8 +32,8 @@ public class CartController {
 		@PathVariable Long cartId,
 		@RequestBody CartDto.AddToCartRequest request
 	) {
-		var cartCommand = CartDtoMapper.toCommand(request);
-		cartFacade.addToCart(cartCommand, cartId);
+		var cartCommand = CartDtoMapper.toCommand(request, cartId);
+		cartFacade.addToCart(cartCommand);
 
 		return CommonResponse.success("OK");
 	}

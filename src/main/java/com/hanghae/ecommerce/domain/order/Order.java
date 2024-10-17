@@ -20,9 +20,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "orders")
 public class Order extends AbstractEntity {
 
@@ -45,6 +47,12 @@ public class Order extends AbstractEntity {
 	@Getter
 	public enum Status{
 		ORDER, CANCEL, COMPLETE
+	}
+
+	public Order(User user, Long totalAmount) {
+		this.user = user;
+		this.totalAmount = totalAmount;
+		this.status = Status.ORDER;
 	}
 
 }

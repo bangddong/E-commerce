@@ -4,8 +4,10 @@ import com.hanghae.ecommerce.domain.product.Product;
 
 public interface CartService {
 
-	void addToCart(Long cartId, Product product, Long quantity);
+	void addToCart(Cart cart, Product product, Long quantity);
 
-	CartInfo.Main getCart(Long cartId);
+	Cart getCart(Long cartId);
+
+	void clearCart(Cart cart);
 
 }

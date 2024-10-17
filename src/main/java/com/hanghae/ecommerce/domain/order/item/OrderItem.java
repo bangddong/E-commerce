@@ -13,9 +13,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "order_items")
 public class OrderItem extends AbstractEntity {
 
@@ -33,5 +35,12 @@ public class OrderItem extends AbstractEntity {
 
 	private Long quantity;
 	private Long price;
+
+	public OrderItem(Order order, Product product, Long quantity) {
+		this.order = order;
+		this.product = product;
+		this.quantity = quantity;
+		this.price = product.getPrice();
+	}
 
 }

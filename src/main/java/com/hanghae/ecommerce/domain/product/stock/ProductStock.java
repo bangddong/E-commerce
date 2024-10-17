@@ -1,5 +1,7 @@
 package com.hanghae.ecommerce.domain.product.stock;
 
+import com.hanghae.ecommerce.common.exception.InvalidParamException;
+import com.hanghae.ecommerce.common.exception.OutOfStockException;
 import com.hanghae.ecommerce.domain.AbstractEntity;
 import com.hanghae.ecommerce.domain.product.Product;
 
@@ -30,10 +32,21 @@ public class ProductStock extends AbstractEntity {
 	private Long stock;
 
 	public ProductStock(Product product) {
-		if (product == null) throw new IllegalArgumentException("ProductStock.product");
+		if (product == null) throw new InvalidParamException("ProductStock.product");
 
 		this.product = product;
 		this.stock = 0L;
+	}
+
+	public void checkStock(Long stock) {
+		if (this.stock < stock) throw new OutOfStockException();
+	}
+
+	public void reduceStock(Long stock) {
+		if (stock == null) throw new InvalidParamException("ProductStock.stock");
+		if (this.stock < stock) throw new OutOfStockException();
+
+		this.stock -= stock;
 	}
 
 }
