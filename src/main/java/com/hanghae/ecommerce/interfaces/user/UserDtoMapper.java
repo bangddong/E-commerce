@@ -4,8 +4,8 @@ import com.hanghae.ecommerce.domain.user.UserCommand;
 
 public class UserDtoMapper {
 
-	public static UserCommand.ChargeRequest toCommand(UserDto.ChargeRequest request) {
-		return UserCommand.ChargeRequest.from(request.amount());
+	public static UserCommand.ChargeRequest toCommand(UserDto.ChargeRequest request, Long userId) {
+		return UserCommand.ChargeRequest.of(request.amount(), userId);
 	}
 
 }

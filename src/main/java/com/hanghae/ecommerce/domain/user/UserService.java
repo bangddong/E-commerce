@@ -1,11 +1,15 @@
 package com.hanghae.ecommerce.domain.user;
 
+import com.hanghae.ecommerce.domain.user.balance.UserBalance;
+
 public interface UserService {
 
-	UserInfo.Balance getBalance(Long userId);
+	UserBalance getBalance(Long userId);
 
-	UserInfo.Balance chargeBalance(Long userId, Long amount);
+	UserBalance chargeBalance(UserBalance userBalance, Long amount);
 
-	UserInfo.Main getUser(Long userId);
+	User getUser(Long userId);
+
+	void checkBalance(User user, Long amount);
 
 }

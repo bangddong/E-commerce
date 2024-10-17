@@ -1,5 +1,6 @@
 package com.hanghae.ecommerce.domain.user.balance;
 
+import com.hanghae.ecommerce.common.exception.InsufficientBalanceException;
 import com.hanghae.ecommerce.common.exception.InvalidParamException;
 import com.hanghae.ecommerce.domain.AbstractEntity;
 import com.hanghae.ecommerce.domain.user.User;
@@ -34,6 +35,10 @@ public class UserBalance extends AbstractEntity {
 		if (balance == null) throw new InvalidParamException("UserBalance.balance");
 
 		this.balance = balance;
+	}
+
+	public void checkBalance(Long amount) {
+		if (this.balance < amount) throw new InsufficientBalanceException();
 	}
 
 }

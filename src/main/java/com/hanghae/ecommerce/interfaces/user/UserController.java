@@ -32,8 +32,8 @@ public class UserController {
             @RequestBody UserDto.ChargeRequest request,
             @PathVariable Long userId
     ) {
-        var userCommand = UserDtoMapper.toCommand(request);
-        var userInfo = userFacade.chargeBalance(userCommand, userId);
+        var userCommand = UserDtoMapper.toCommand(request, userId);
+        var userInfo = userFacade.chargeBalance(userCommand);
         var response = UserDto.BalanceResponse.from(userInfo);
 
         return CommonResponse.success(response);

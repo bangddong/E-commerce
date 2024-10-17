@@ -2,10 +2,11 @@ package com.hanghae.ecommerce.domain.user;
 
 public class UserCommand {
 	public record ChargeRequest(
-		Long amount
+		Long amount,
+		Long userId
 	) {
-		public static ChargeRequest from(Long amount) {
-			return new ChargeRequest(amount);
+		public static ChargeRequest of(Long amount, Long userId) {
+			return new ChargeRequest(amount, userId);
 		}
 	}
 }
