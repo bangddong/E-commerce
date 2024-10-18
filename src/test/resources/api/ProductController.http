@@ -2,4 +2,4 @@
 GET http://localhost:8080/products
 
 ### 판매량 상위 상품 조회
-GET http://localhost:8080/products/top-sellers
+GET http://localhost:8080/products/top-selling
