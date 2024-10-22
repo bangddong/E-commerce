@@ -14,8 +14,8 @@ public class CartItemStoreImpl implements CartItemStore {
 	private final CartItemRepository cartItemRepository;
 
 	@Override
-	public CartItem store(CartItem cartItem) {
-		return cartItemRepository.save(cartItem);
+	public void store(CartItem cartItem) {
+		cartItemRepository.save(cartItem);
 	}
 
 }

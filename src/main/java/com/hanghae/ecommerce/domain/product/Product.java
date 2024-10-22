@@ -1,15 +1,13 @@
 package com.hanghae.ecommerce.domain.product;
 
 import com.hanghae.ecommerce.common.exception.InvalidParamException;
+import com.hanghae.ecommerce.common.exception.OutOfStockException;
 import com.hanghae.ecommerce.domain.AbstractEntity;
-import com.hanghae.ecommerce.domain.product.stock.ProductStock;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,18 +24,26 @@ public class Product extends AbstractEntity {
 
 	private String name;
 	private Long price;
+	private Long stock;
 
-	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-	private ProductStock productStock;
-
-	public Product(String name, Long price) {
+	public Product(String name, Long price, Long stock) {
 		if (name == null) throw new InvalidParamException("Product.name");
 		if (price == null) throw new InvalidParamException("Product.price");
-		if (productStock == null) throw new InvalidParamException("Product.productStock");
+		if (stock == null) throw new InvalidParamException("Product.stock");
 
 		this.name = name;
 		this.price = price;
-		this.productStock = new ProductStock(this);
+		this.stock = stock;
+	}
+	public void checkStock(Long amount) {
+		if (amount == null) throw new InvalidParamException("Product.stock");
+		if (stock < amount) throw new OutOfStockException();
 	}
 
+	public void reduceStock(Long amount) {
+		if (amount == null) throw new InvalidParamException("Product.stock");
+		if (stock < amount) throw new OutOfStockException();
+
+		this.stock -= amount;
+	}
 }

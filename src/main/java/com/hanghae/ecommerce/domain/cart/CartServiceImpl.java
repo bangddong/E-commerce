@@ -2,8 +2,8 @@ package com.hanghae.ecommerce.domain.cart;
 
 import org.springframework.stereotype.Service;
 
+import com.hanghae.ecommerce.domain.cart.item.CartItem;
 import com.hanghae.ecommerce.domain.cart.item.CartItemStore;
-import com.hanghae.ecommerce.domain.product.Product;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,29 +12,27 @@ import lombok.RequiredArgsConstructor;
 public class CartServiceImpl implements CartService {
 
 	private final CartReader cartReader;
+	private final CartDeleter cartDeleter;
 	private final CartItemStore cartItemStore;
 
 	@Override
-	public void addToCart(Cart cart, Product product, Long quantity) {
-		var existItem = cart.getCartItems().stream()
-			.filter(cartItem -> cartItem.getProduct().getId().equals(product.getId()))
-			.findFirst();
+	public void clearCart(Long cartId) {
+		var cartItem = cartReader.getCartItem(cartId);
 
-		if (existItem.isPresent()) {
-			existItem.get().updateQuantity(quantity);
-		} else {
-			var cartItem = CartCommand.AddToCartRequest.toEntity(cart, product, quantity);
-			cart.getCartItems().add(cartItem);
-		}
+		cartDeleter.delete(cartItem);
 	}
 
 	@Override
-	public Cart getCart(Long cartId) {
-		return cartReader.getCart(cartId);
+	public void addToCart(CartCommand.AddToCartRequest request) {
+		var cartItem = CartItem.toEntity(request);
+
+		cartItemStore.store(cartItem);
 	}
 
 	@Override
-	public void clearCart(Cart cart) {
-		cart.clearItems();
+	public CartInfo.Main getCart(Long cartId) {
+		var cart = cartReader.getCart(cartId);
+
+		return CartInfo.Main.from(cart);
 	}
 }

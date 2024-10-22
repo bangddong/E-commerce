@@ -1,44 +1,28 @@
 package com.hanghae.ecommerce.domain.cart;
 
-import java.util.List;
-
-import com.hanghae.ecommerce.domain.cart.item.CartItem;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 public class CartInfo {
 
-	public record Main(
-		Long id,
-		Long userId,
-		List<CartItemInfo> cartItems
-	) {
-		public static CartInfo.Main of(Cart cart) {
-			return new CartInfo.Main(
-				cart.getId(),
-				cart.getUser().getId(),
-				cart.getCartItems().stream()
-					.map(CartItemInfo::from)
-					.toList()
-			);
-		}
-	}
+	@Getter
+	@Builder
+	@ToString
+	public static class Main {
+		private final Long id;
+		private final Long userId;
 
-	public record CartItemInfo(
-		Long id,
-		Long productId,
-		String productName,
-		Long quantity
-	) {
-		public static CartItemInfo from(CartItem cartItem) {
-			return new CartItemInfo(
-				cartItem.getId(),
-				cartItem.getProduct().getId(),
-				cartItem.getProduct().getName(),
-				cartItem.getQuantity()
-			);
+		public Main(Long id, Long userId) {
+			this.id = id;
+			this.userId = userId;
 		}
 
-		public static CartItem from() {
-			return new CartItem();
+		public static CartInfo.Main from(Cart cart) {
+			return CartInfo.Main.builder()
+				.id(cart.getId())
+				.userId(cart.getUserId())
+				.build();
 		}
 	}
 

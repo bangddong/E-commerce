@@ -1,24 +1,25 @@
 package com.hanghae.ecommerce.domain.order;
 
-import com.hanghae.ecommerce.domain.order.item.OrderItem;
-import com.hanghae.ecommerce.domain.product.Product;
-import com.hanghae.ecommerce.domain.user.User;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 public class OrderCommand {
 
-	public record CreateOrderRequest(
-		Long cartId
-	) {
-		public static CreateOrderRequest from(Long cartId) {
-			return new CreateOrderRequest(cartId);
+	@Getter
+	@Builder
+	@ToString
+	public static class CreateOrderRequest {
+		private Long cartId;
+
+		public CreateOrderRequest(Long cartId) {
+			this.cartId = cartId;
 		}
 
-		public static Order toEntity(User user, Long totalAmount) {
-			return new Order(user, totalAmount);
-		}
-
-		public static OrderItem toEntity(Order order, Product product, Long quantity) {
-			return new OrderItem(order, product, quantity);
+		public static OrderCommand.CreateOrderRequest of(Long cartId) {
+			return CreateOrderRequest.builder()
+				.cartId(cartId)
+				.build();
 		}
 	}
 

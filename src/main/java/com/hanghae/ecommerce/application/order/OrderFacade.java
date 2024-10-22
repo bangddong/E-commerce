@@ -2,8 +2,6 @@ package com.hanghae.ecommerce.application.order;
 
 import org.springframework.stereotype.Service;
 
-import com.hanghae.ecommerce.common.exception.InsufficientBalanceException;
-import com.hanghae.ecommerce.common.exception.OutOfStockException;
 import com.hanghae.ecommerce.domain.cart.CartService;
 import com.hanghae.ecommerce.domain.order.OrderCommand;
 import com.hanghae.ecommerce.domain.order.OrderService;

@@ -2,9 +2,8 @@ package com.hanghae.ecommerce.domain.cart;
 
 import com.hanghae.ecommerce.domain.cart.item.CartItem;
 
-public interface CartReader {
+public interface CartDeleter {
 
-	Cart getCart(Long cartId);
-	CartItem getCartItem(Long cartId);
+	void delete(CartItem cartItem);
 
 }

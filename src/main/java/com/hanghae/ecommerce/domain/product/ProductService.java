@@ -2,19 +2,12 @@ package com.hanghae.ecommerce.domain.product;
 
 import java.util.List;
 
-import com.hanghae.ecommerce.domain.product.stock.ProductStock;
-
 public interface ProductService {
 
-	List<Product> getProducts();
+	List<ProductInfo.Main> getProducts();
+	List<ProductInfo.Main> getTopSelling();
+	ProductInfo.Main getProduct(Long productId);
+	void checkStock(Long productId, Long quantity);
+	void reduceStock(Long productId, Long quantity);
 
-	List<Product> getTopSelling();
-
-	Product getProduct(Long productId);
-
-	ProductStock getProductStock(Long productId);
-
-	void checkStock(ProductStock productStock, Long quantity);
-
-	void reduceStock(Product product, Long quantity);
 }

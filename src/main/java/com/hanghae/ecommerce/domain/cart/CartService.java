@@ -1,13 +1,11 @@
 package com.hanghae.ecommerce.domain.cart;
 
-import com.hanghae.ecommerce.domain.product.Product;
-
 public interface CartService {
 
-	void addToCart(Cart cart, Product product, Long quantity);
+	void addToCart(CartCommand.AddToCartRequest request);
 
-	Cart getCart(Long cartId);
+	CartInfo.Main getCart(Long cartId);
 
-	void clearCart(Cart cart);
+	void clearCart(Long cartId);
 
 }

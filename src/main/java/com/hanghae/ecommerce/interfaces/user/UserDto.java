@@ -13,8 +13,8 @@ public class UserDto {
             Long userId,
             Long balance
     ) {
-        public static BalanceResponse from(UserInfo.Balance userInfo) {
-            return new BalanceResponse(userInfo.id(), userInfo.balance());
+        public static BalanceResponse from(UserInfo.Main userInfo) {
+            return new BalanceResponse(userInfo.getId(), userInfo.getUserBalance());
         }
     }
 

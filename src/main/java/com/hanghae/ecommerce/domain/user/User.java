@@ -1,14 +1,13 @@
 package com.hanghae.ecommerce.domain.user;
 
+import com.hanghae.ecommerce.common.exception.InsufficientBalanceException;
+import com.hanghae.ecommerce.common.exception.InvalidParamException;
 import com.hanghae.ecommerce.domain.AbstractEntity;
-import com.hanghae.ecommerce.domain.user.balance.UserBalance;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,16 @@ public class User extends AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private UserBalance userBalance;
+	private Long userBalance;
+
+	public void checkBalance(Long amount) {
+		if (userBalance < amount) throw new InsufficientBalanceException();
+	}
+
+	public void chargeBalance(Long amount) {
+		if (amount == null) throw new InvalidParamException("User.balance");
+
+		this.userBalance += amount;
+	}
 
 }

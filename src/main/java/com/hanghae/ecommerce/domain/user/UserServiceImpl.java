@@ -2,8 +2,6 @@ package com.hanghae.ecommerce.domain.user;
 
 import org.springframework.stereotype.Service;
 
-import com.hanghae.ecommerce.domain.user.balance.UserBalance;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -13,25 +11,23 @@ public class UserServiceImpl implements UserService {
 	private final UserReader userReader;
 
 	@Override
-	public UserBalance getBalance(Long userId) {
-		return userReader.getBalance(userId);
+	public void checkBalance(Long userId, Long amount) {
+		User user = userReader.getUser(userId);
+		user.checkBalance(amount);
 	}
 
 	@Override
-	public UserBalance chargeBalance(UserBalance userBalance, Long amount) {
-		userBalance.updateBalance(amount);
+	public UserInfo.Main chargeBalance(UserCommand.ChargeRequest command) {
+		User user = userReader.getUser(command.getUserId());
+		user.chargeBalance(command.getAmount());
 
-		return userBalance;
+		return UserInfo.Main.from(user);
 	}
 
 	@Override
-	public User getUser(Long userId) {
-		return userReader.getUser(userId);
-	}
+	public UserInfo.Main getUser(Long userId) {
+		User user = userReader.getUser(userId);
 
-	@Override
-	public void checkBalance(User user, Long amount) {
-		UserBalance userBalance = user.getUserBalance();
-		userBalance.checkBalance(amount);
+		return UserInfo.Main.from(user);
 	}
 }

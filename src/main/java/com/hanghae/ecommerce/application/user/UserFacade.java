@@ -16,19 +16,13 @@ public class UserFacade {
 	private final UserService userService;
 
 	@Transactional
-	public UserInfo.Balance getBalance(Long userId) {
-		var userBalance = userService.getBalance(userId);
-		return UserInfo.Balance.from(userBalance);
+	public UserInfo.Main getBalance(Long userId) {
+		return userService.getUser(userId);
 	}
 
 	@Transactional
-	public UserInfo.Balance chargeBalance(UserCommand.ChargeRequest command) {
-		var userBalance = userService.getBalance(command.userId());
-		var updateAmount = userBalance.getBalance() + command.amount();
-
-		userBalance = userService.chargeBalance(userBalance, updateAmount);
-
-		return UserInfo.Balance.from(userBalance);
+	public UserInfo.Main chargeBalance(UserCommand.ChargeRequest command) {
+		return userService.chargeBalance(command);
 	}
 
 }

@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hanghae.ecommerce.domain.product.stock.ProductStock;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -17,33 +15,39 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	@Transactional
-	public List<Product> getProducts() {
-		return productReader.getProducts();
+	public List<ProductInfo.Main> getProducts() {
+		List<Product> products = productReader.getProducts();
+
+		return products.stream()
+			.map(ProductInfo.Main::from)
+			.toList();
 	}
 
 	@Override
-	public List<Product> getTopSelling() {
-		return productReader.getTopSelling();
+	public List<ProductInfo.Main> getTopSelling() {
+		List<Product> products = productReader.getTopSelling();
+
+		return products.stream()
+			.map(ProductInfo.Main::from)
+			.toList();
 	}
 
 	@Override
-	public Product getProduct(Long productId) {
-		return productReader.getProduct(productId);
+	public ProductInfo.Main getProduct(Long productId) {
+		Product product = productReader.getProduct(productId);
+
+		return ProductInfo.Main.from(product);
 	}
 
 	@Override
-	public ProductStock getProductStock(Long productId) {
-		return productReader.getProductStock(productId);
+	public void checkStock(Long productId, Long quantity) {
+		Product product = productReader.getProduct(productId);
+		product.checkStock(quantity);
 	}
 
 	@Override
-	public void checkStock(ProductStock productStock, Long quantity) {
-		productStock.checkStock(quantity);
+	public void reduceStock(Long productId, Long quantity) {
+		Product product = productReader.getProduct(productId);
+		product.reduceStock(quantity);
 	}
-
-	@Override
-	public void reduceStock(Product product, Long quantity) {
-		product.getProductStock().reduceStock(quantity);
-	}
-
 }

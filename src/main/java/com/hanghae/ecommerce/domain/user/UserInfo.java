@@ -1,21 +1,28 @@
 package com.hanghae.ecommerce.domain.user;
 
-import com.hanghae.ecommerce.domain.user.balance.UserBalance;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 public class UserInfo {
 
-	public record Main(Long id) {
-		public static UserInfo.Main from(User user) {
-			return new UserInfo.Main(user.getId());
-		}
-	}
+	@Getter
+	@Builder
+	@ToString
+	public static class Main {
+		private final Long id;
+		private final Long userBalance;
 
-	public record Balance(Long id, Long balance) {
-		public static Balance from(UserBalance userBalance) {
-			return new Balance(
-				userBalance.getId(),
-				userBalance.getBalance()
-			);
+		public Main(Long userId, Long userBalance) {
+			this.id = userId;
+			this.userBalance = userBalance;
+		}
+
+		public static UserInfo.Main from(User user) {
+			return UserInfo.Main.builder()
+				.id(user.getId())
+				.userBalance(user.getUserBalance())
+				.build();
 		}
 	}
 

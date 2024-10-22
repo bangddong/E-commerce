@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hanghae.ecommerce.domain.product.Product;
 import com.hanghae.ecommerce.domain.product.ProductReader;
-import com.hanghae.ecommerce.domain.product.stock.ProductStock;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 public class ProductReaderImpl implements ProductReader {
 
 	private final ProductRepository productRepository;
-	private final ProductStockRepository productStockRepository;
 
 	@Override
 	public List<Product> getProducts() {
@@ -36,8 +34,4 @@ public class ProductReaderImpl implements ProductReader {
 		return productRepository.findTopSellingProducts(pageable);
 	}
 
-	@Override
-	public ProductStock getProductStock(Long productId) {
-		return productStockRepository.findByProductId(productId);
-	}
 }
