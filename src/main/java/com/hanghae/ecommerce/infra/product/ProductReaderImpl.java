@@ -2,8 +2,6 @@ package com.hanghae.ecommerce.infra.product;
 
 import java.util.List;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.hanghae.ecommerce.domain.product.Product;
@@ -29,9 +27,14 @@ public class ProductReaderImpl implements ProductReader {
 	}
 
 	@Override
-	public List<Product> getTopSelling() {
-		Pageable pageable = PageRequest.of(0, 5);
-		return productRepository.findTopSellingProducts(pageable);
+	public List<Product> getProductsByIds(List<Long> productIds) {
+		return productRepository.findAllByIdIn(productIds);
 	}
+
+	// @Override
+	// public List<Product> getTopSelling() {
+	// 	Pageable pageable = PageRequest.of(0, 5);
+	// 	return productRepository.findTopSellingProducts(pageable);
+	// }
 
 }

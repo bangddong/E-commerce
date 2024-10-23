@@ -7,9 +7,9 @@ import com.hanghae.ecommerce.domain.product.ProductInfo;
 public class ProductDto {
 
     public record ProductResponse(
-            List<ProductInfo> products
+            List<ProductInfo.Main> products
     ) {
-        public static ProductResponse of(List<ProductInfo> productInfoList) {
+        public static ProductResponse of(List<ProductInfo.Main> productInfoList) {
             return new ProductResponse(productInfoList);
         }
     }

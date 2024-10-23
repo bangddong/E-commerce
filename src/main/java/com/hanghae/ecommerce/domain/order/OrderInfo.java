@@ -14,12 +14,6 @@ public class OrderInfo {
 		private Long userId;
 		private Long totalAmount;
 
-		public Main(Long orderId, Long userId, Long totalAmount) {
-			this.orderId = orderId;
-			this.userId = userId;
-			this.totalAmount = totalAmount;
-		}
-
 		public static OrderInfo.Main from(Order order) {
 			return OrderInfo.Main.builder()
 				.orderId(order.getId())

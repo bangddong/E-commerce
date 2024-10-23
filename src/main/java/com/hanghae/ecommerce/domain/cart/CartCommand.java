@@ -10,14 +10,16 @@ public class CartCommand {
 	@Builder
 	@ToString
 	public static class AddToCartRequest {
-		private Long productId;
-		private Long quantity;
-		private Long cartId;
+		private final Long productId;
+		private final Long quantity;
+		private final Long cartId;
 
-		public AddToCartRequest(Long productId, Long quantity, Long cartId) {
-			this.productId = productId;
-			this.quantity = quantity;
-			this.cartId = cartId;
+		public static AddToCartRequest of(Long productId, Long quantity, Long cartId) {
+			return AddToCartRequest.builder()
+					.productId(productId)
+					.quantity(quantity)
+					.cartId(cartId)
+					.build();
 		}
 	}
 

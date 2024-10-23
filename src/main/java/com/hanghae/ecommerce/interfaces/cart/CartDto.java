@@ -3,6 +3,7 @@ package com.hanghae.ecommerce.interfaces.cart;
 import java.util.List;
 
 import com.hanghae.ecommerce.domain.cart.CartInfo;
+import com.hanghae.ecommerce.domain.cart.item.CartItemInfo;
 
 public class CartDto {
 
@@ -15,10 +16,14 @@ public class CartDto {
 	public record CartResponse(
 		Long id,
 		Long userId,
-		List<CartInfo.CartItemInfo> cartItems
+		List<CartItemInfo.Main> cartItems
 	) {
 		public static CartResponse from(CartInfo.Main cartInfo) {
-			return new CartResponse(cartInfo.id(), cartInfo.userId(), cartInfo.cartItems());
+			return new CartResponse(
+				cartInfo.getId(),
+				cartInfo.getUserId(),
+				cartInfo.getCartItems()
+			);
 		}
 	}
 

@@ -15,13 +15,6 @@ public class ProductInfo {
 		private final Long price;
 		private final Long stock;
 
-		public Main(Long id, String name, Long price, Long stock) {
-			this.id = id;
-			this.name = name;
-			this.price = price;
-			this.stock = stock;
-		}
-
 		public static ProductInfo.Main from(Product product) {
 			return ProductInfo.Main.builder()
 				.id(product.getId())

@@ -10,13 +10,9 @@ public class OrderCommand {
 	@Builder
 	@ToString
 	public static class CreateOrderRequest {
-		private Long cartId;
+		private final Long cartId;
 
-		public CreateOrderRequest(Long cartId) {
-			this.cartId = cartId;
-		}
-
-		public static OrderCommand.CreateOrderRequest of(Long cartId) {
+		public static OrderCommand.CreateOrderRequest from(Long cartId) {
 			return CreateOrderRequest.builder()
 				.cartId(cartId)
 				.build();

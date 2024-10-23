@@ -6,6 +6,7 @@ public interface ProductReader {
 
 	List<Product> getProducts();
 	Product getProduct(Long productId);
-	List<Product> getTopSelling();
+	List<Product> getProductsByIds(List<Long> productIds);
+	// List<Product> getTopSelling();
 
 }

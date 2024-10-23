@@ -19,20 +19,15 @@ public class CartFacade {
 
 	@Transactional
 	public void addToCart(CartCommand.AddToCartRequest command) {
-		var stock = productService.getProductStock(command.productId());
-		stock.checkStock(command.quantity());
+		var product = productService.getProduct(command.getProductId());
+		productService.checkStock(product.getId(), command.getQuantity());
 
-		var product = productService.getProduct(command.productId());
-		var cart = cartService.getCart(command.cartId());
-
-		cartService.addToCart(cart, product, command.quantity());
+		cartService.addToCart(command);
 	}
 
 	@Transactional
 	public CartInfo.Main getCart(Long cartId) {
-		var cart = cartService.getCart(cartId);
-
-		return CartInfo.Main.of(cart);
+		return cartService.getCart(cartId);
 	}
 
 }

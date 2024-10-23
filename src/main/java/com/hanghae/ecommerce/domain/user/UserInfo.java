@@ -13,11 +13,6 @@ public class UserInfo {
 		private final Long id;
 		private final Long userBalance;
 
-		public Main(Long userId, Long userBalance) {
-			this.id = userId;
-			this.userBalance = userBalance;
-		}
-
 		public static UserInfo.Main from(User user) {
 			return UserInfo.Main.builder()
 				.id(user.getId())

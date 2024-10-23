@@ -1,7 +1,11 @@
 package com.hanghae.ecommerce.domain.order;
 
+import java.util.List;
+
 public interface OrderService {
 
-	OrderInfo.Main createOrder(Long cartId, Long totalAmount);
+	void createOrder(Long cartId, Long totalAmount);
+	void createOrderItem(Long orderId, Long productId, Long amount, Long price);
+	List<Long> getTopSelling();
 
 }
