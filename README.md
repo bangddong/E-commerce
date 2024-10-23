@@ -47,6 +47,9 @@
 - [ ] 주문 처리 로직 개선 (비동기 처리, 상태 관리 등)
 - [ ] 장바구니 로직 구현 (Optional)
 
+## API 명세
+![image](https://github.com/user-attachments/assets/a19f1eda-8998-4b95-b890-725eacfd8505)
+
 ## 요청별 시퀀스 다이어그램
 
 ### 사용자 잔액조회
