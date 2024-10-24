@@ -19,7 +19,7 @@ class UserServiceImplTest {
 	private UserServiceImpl userService;
 
 	@Test
-	void checkBalance() {
+	void useAmount() {
 		// given
 		Long userId = 1L;
 		Long amount = 1000L;
@@ -28,11 +28,11 @@ class UserServiceImplTest {
 		when(userReader.getUser(userId)).thenReturn(user);
 
 		// when
-		userService.checkBalance(userId, amount);
+		userService.useAmount(userId, amount);
 
 		// then
 		verify(userReader, times(1)).getUser(userId);
-		verify(user, times(1)).checkBalance(amount);
+		verify(user, times(1)).useAmount(amount);
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class UserServiceImplTest {
 		// given
 		Long userId = 1L;
 		Long amount = 1000L;
-		UserCommand.ChargeRequest command = UserCommand.ChargeRequest.of(amount, userId);
+		UserCommand.ChargeRequest command = UserCommand.ChargeRequest.of(userId, amount);
 		User user = mock(User.class);
 
 		when(userReader.getUser(userId)).thenReturn(user);

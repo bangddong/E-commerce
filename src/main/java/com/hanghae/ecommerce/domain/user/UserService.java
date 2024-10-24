@@ -4,6 +4,6 @@ public interface UserService {
 
 	UserInfo.Main chargeBalance(UserCommand.ChargeRequest command);
 	UserInfo.Main getUser(Long userId);
-	void checkBalance(Long userId, Long amount);
+	void useAmount(Long userId, Long amount);
 
 }
