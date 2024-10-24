@@ -26,4 +26,5 @@ public class RequestIdInterceptor implements HandlerInterceptor {
         MDC.put(REQUEST_ID_HEADER, requestEventId);
         return true;
     }
+
 }

@@ -18,12 +18,12 @@ public class ProductFacade {
 	private final ProductService productService;
 	private final OrderService orderService;
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<ProductInfo.Main> getProducts() {
 		return  productService.getProducts();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<ProductInfo.Main> getTopSelling() {
 		var productIds = orderService.getTopSelling();
 

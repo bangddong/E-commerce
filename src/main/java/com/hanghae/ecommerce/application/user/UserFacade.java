@@ -15,7 +15,7 @@ public class UserFacade {
 
 	private final UserService userService;
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public UserInfo.Main getBalance(Long userId) {
 		return userService.getUser(userId);
 	}

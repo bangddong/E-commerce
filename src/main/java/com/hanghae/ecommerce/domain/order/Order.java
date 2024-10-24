@@ -52,4 +52,8 @@ public class Order extends AbstractEntity {
 			.build();
 	}
 
+	public void complete() {
+		this.status = Status.COMPLETE;
+	}
+
 }

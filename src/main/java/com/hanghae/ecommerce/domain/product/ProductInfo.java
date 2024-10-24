@@ -23,5 +23,14 @@ public class ProductInfo {
 				.stock(product.getStock())
 				.build();
 		}
+
+		public static ProductInfo.Main of(Long id, String name, Long price, Long stock) {
+			return ProductInfo.Main.builder()
+				.id(id)
+				.name(name)
+				.price(price)
+				.stock(stock)
+				.build();
+		}
 	}
 }
