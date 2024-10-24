@@ -25,7 +25,7 @@ public class CartFacade {
 		cartService.addToCart(command);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public CartInfo.Main getCart(Long cartId) {
 		return cartService.getCart(cartId);
 	}

@@ -31,10 +31,4 @@ public class ProductReaderImpl implements ProductReader {
 		return productRepository.findAllByIdIn(productIds);
 	}
 
-	// @Override
-	// public List<Product> getTopSelling() {
-	// 	Pageable pageable = PageRequest.of(0, 5);
-	// 	return productRepository.findTopSellingProducts(pageable);
-	// }
-
 }

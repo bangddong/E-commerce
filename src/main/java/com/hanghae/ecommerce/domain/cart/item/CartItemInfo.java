@@ -23,6 +23,15 @@ public class CartItemInfo {
 				.quantity(cartItem.getQuantity())
 				.build();
 		}
+
+		public static CartItemInfo.Main of(Long id, Long cartId, Long productId, Long quantity) {
+			return Main.builder()
+				.id(id)
+				.cartId(cartId)
+				.productId(productId)
+				.quantity(quantity)
+				.build();
+		}
 	}
 
 }
