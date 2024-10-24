@@ -11,9 +11,9 @@ public class UserServiceImpl implements UserService {
 	private final UserReader userReader;
 
 	@Override
-	public void checkBalance(Long userId, Long amount) {
+	public void useAmount(Long userId, Long amount) {
 		User user = userReader.getUser(userId);
-		user.checkBalance(amount);
+		user.useAmount(amount);
 	}
 
 	@Override

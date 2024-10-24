@@ -1,5 +1,8 @@
 package com.hanghae.ecommerce.application.order;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,16 @@ public class OrderFacade {
 	private final CartService cartService;
 	private final UserService userService;
 
+	private final ConcurrentHashMap<Long, ReentrantLock> locks = new ConcurrentHashMap<>();
+
+	private ReentrantLock getProductLock(long productId) {
+		return locks.computeIfAbsent(productId, key -> new ReentrantLock());
+	}
+
+	private ReentrantLock getUserLock(long userId) {
+		return locks.computeIfAbsent(userId, key -> new ReentrantLock());
+	}
+
 	@Transactional
 	public void createOrder(OrderCommand.CreateOrderRequest command) {
 		var cart = cartService.getCart(command.getCartId());
@@ -45,7 +58,10 @@ public class OrderFacade {
 			.sum();
 
 		var user = userService.getUser(cart.getUserId());
-		userService.checkBalance(user.getId(), totalAmount);
+		ReentrantLock userLock = getUserLock(user.getId());
+		userLock.lock();
+		userService.useAmount(user.getId(), totalAmount);
+		userLock.unlock();
 
 		orderService.createOrder(user.getId(), totalAmount);
 		cartItems.forEach(cartItem -> {
@@ -58,7 +74,12 @@ public class OrderFacade {
 			orderService.createOrderItem(user.getId(), cartItem.getProductId(), cartItem.getQuantity(), price);
 		});
 
-		cart.getCartItems().forEach(cartItem -> productService.reduceStock(cartItem.getProductId(), cartItem.getQuantity()));
+		cart.getCartItems().forEach(cartItem -> {
+			ReentrantLock productLock = getProductLock(cartItem.getProductId());
+			productLock.lock();
+			productService.reduceStock(cartItem.getProductId(), cartItem.getQuantity());
+			productLock.unlock();
+		});
 
 		cartService.clearCart(cart.getId());
 		orderService.completeOrder(user.getId());
