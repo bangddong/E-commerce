@@ -61,6 +61,7 @@ public class OrderFacade {
 		cart.getCartItems().forEach(cartItem -> productService.reduceStock(cartItem.getProductId(), cartItem.getQuantity()));
 
 		cartService.clearCart(cart.getId());
+		orderService.completeOrder(user.getId());
 	}
 
 }

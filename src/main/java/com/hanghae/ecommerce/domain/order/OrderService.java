@@ -8,4 +8,5 @@ public interface OrderService {
 	void createOrderItem(Long orderId, Long productId, Long amount, Long price);
 	List<Long> getTopSelling();
 
+	void completeOrder(Long id);
 }

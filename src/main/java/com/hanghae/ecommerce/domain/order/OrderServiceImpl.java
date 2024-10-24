@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderServiceImpl implements OrderService {
 
 	private final OrderStore orderStore;
+	private final OrderReader orderReader;
 	private final OrderItemStore orderItemStore;
 	private final OrderItemReader orderItemReader;
 
@@ -37,4 +38,10 @@ public class OrderServiceImpl implements OrderService {
 		return orderItemReader.getTopSelling();
 	}
 
+	@Override
+	public void completeOrder(Long id) {
+		var order = orderReader.getOrder(id);
+
+		order.complete();
+	}
 }
