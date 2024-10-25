@@ -4,17 +4,14 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.hanghae.ecommerce.domain.cart.CartInfo;
 import com.hanghae.ecommerce.domain.cart.CartService;
-import com.hanghae.ecommerce.domain.cart.item.CartItem;
 import com.hanghae.ecommerce.domain.cart.item.CartItemInfo;
 import com.hanghae.ecommerce.domain.order.OrderCommand;
 import com.hanghae.ecommerce.domain.order.OrderService;
@@ -70,7 +67,7 @@ public class OrderFacadeTest {
 		when(userService.getUser(anyLong())).thenReturn(userInfo);
 
 		doNothing().when(productService).checkStock(anyLong(), anyLong());
-		doNothing().when(userService).checkBalance(anyLong(), anyLong());
+		doNothing().when(userService).useAmount(anyLong(), anyLong());
 		doNothing().when(orderService).createOrder(anyLong(), anyLong());
 		doNothing().when(orderService).createOrderItem(anyLong(), anyLong(), anyLong(), anyLong());
 		doNothing().when(productService).reduceStock(anyLong(), anyLong());
@@ -86,7 +83,7 @@ public class OrderFacadeTest {
 		verify(productService, times(2)).checkStock(anyLong(), anyLong());
 		verify(productService, times(1)).getProductsByIds(anyList());
 		verify(userService, times(1)).getUser(userId);
-		verify(userService, times(1)).checkBalance(userId, totalAmount);
+		verify(userService, times(1)).useAmount(userId, totalAmount);
 		verify(orderService, times(1)).createOrder(userId, totalAmount);
 		verify(orderService, times(2)).createOrderItem(anyLong(), anyLong(), anyLong(), anyLong());
 		verify(productService, times(2)).reduceStock(anyLong(), anyLong());

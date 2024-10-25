@@ -53,6 +53,7 @@ public class Order extends AbstractEntity {
 	}
 
 	public void complete() {
+		if (this.status != Status.ORDER) throw new IllegalStateException("이미 주문이 완료된 상태입니다.");
 		this.status = Status.COMPLETE;
 	}
 
