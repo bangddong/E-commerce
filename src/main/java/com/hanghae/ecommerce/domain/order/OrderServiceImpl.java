@@ -3,6 +3,7 @@ package com.hanghae.ecommerce.domain.order;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hanghae.ecommerce.domain.order.item.OrderItem;
 import com.hanghae.ecommerce.domain.order.item.OrderItemReader;
@@ -20,6 +21,7 @@ public class OrderServiceImpl implements OrderService {
 	private final OrderItemReader orderItemReader;
 
 	@Override
+	@Transactional(readOnly = true)
 	public void createOrder(Long userId, Long totalAmount) {
 		var order = Order.toEntity(userId, totalAmount);
 
@@ -27,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public void createOrderItem(Long orderId, Long productId, Long amount, Long price) {
 		var orderItem = OrderItem.toEntity(orderId, productId, amount, price);
 
@@ -34,11 +37,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Long> getTopSelling() {
 		return orderItemReader.getTopSelling();
 	}
 
 	@Override
+	@Transactional
 	public void completeOrder(Long id) {
 		var order = orderReader.getOrder(id);
 
