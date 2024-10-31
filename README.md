@@ -1,5 +1,9 @@
 # E-commerce
 
+## 동시성 이슈 정리
+https://dhbang.tistory.com/116
+
+
 ## 후기
 아직 항해 4주밖에 되지 않았으나 가장 힘들었던 과제였습니다.  
 
