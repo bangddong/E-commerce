@@ -1,6 +1,6 @@
 package com.hanghae.ecommerce.interfaces.product;
 
-import com.hanghae.ecommerce.application.product.ProductFacade;
+import com.hanghae.ecommerce.application.ProductFacade;
 import com.hanghae.ecommerce.common.response.CommonResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

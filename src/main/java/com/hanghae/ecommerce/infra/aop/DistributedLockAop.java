@@ -33,10 +33,10 @@ public class DistributedLockAop {
 			CustomSpringELParser.getDynamicValue(
 				signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key()
 			);
-		RLock rLock = redissonClient.getLock(key);
+		RLock rLock = redissonClient.getLock(key); // Lock을 획득한다.
 
 		try {
-			boolean available = rLock.tryLock(
+			boolean available = rLock.tryLock( // 정해진 시간동안 Lock 획득을 위해 대기한다.
 				distributedLock.waitTime(),
 				distributedLock.leaseTime(),
 				distributedLock.timeUnit()
@@ -45,12 +45,12 @@ public class DistributedLockAop {
 				return false;
 			}
 
-			return aopForTransaction.proceed(joinPoint);
+			return aopForTransaction.proceed(joinPoint); // 락을 획득한 후에 새 트랜잭션을 시작한다.
 		} catch (InterruptedException e) {
 			throw new InterruptedException();
 		} finally {
 			try {
-				rLock.unlock();   // (4)
+				rLock.unlock(); // 종료시 락을 해제한다.
 			} catch (IllegalMonitorStateException e) {
 				log.info("Redisson Lock Already UnLock {} {}",
 					"serviceName" + method.getName(),
@@ -59,4 +59,5 @@ public class DistributedLockAop {
 			}
 		}
 	}
+
 }

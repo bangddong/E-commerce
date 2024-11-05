@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hanghae.ecommerce.application.cart.CartFacade;
+import com.hanghae.ecommerce.application.CartFacade;
 import com.hanghae.ecommerce.common.response.CommonResponse;
 
 import lombok.RequiredArgsConstructor;

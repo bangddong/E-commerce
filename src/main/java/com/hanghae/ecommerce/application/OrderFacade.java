@@ -1,7 +1,6 @@
-package com.hanghae.ecommerce.application.order;
+package com.hanghae.ecommerce.application;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hanghae.ecommerce.common.exception.EntityNotFoundException;
 import com.hanghae.ecommerce.domain.cart.CartService;
