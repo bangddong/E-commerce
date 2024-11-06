@@ -2,6 +2,8 @@ package com.hanghae.ecommerce.domain.product;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +16,11 @@ import lombok.RequiredArgsConstructor;
 public class ProductServiceImpl implements ProductService{
 
 	private final ProductReader productReader;
+	private final ProductStore productStore;
+	private final ProductDeleter productDeleter;
 
 	@Override
+	@Cacheable(value = "productList", cacheManager = "redisCacheManager")
 	@Transactional(readOnly = true)
 	public List<ProductInfo.Main> getProducts() {
 		var products = productReader.getProducts();
@@ -36,6 +41,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	@Cacheable(value = "product", key = "#productId", cacheManager = "redisCacheManager")
 	@Transactional(readOnly = true)
 	public ProductInfo.Main getProduct(Long productId) {
 		var product = productReader.getProduct(productId);
@@ -56,4 +62,15 @@ public class ProductServiceImpl implements ProductService{
 		var product = productReader.getProduct(productId);
 		product.reduceStock(quantity);
 	}
+
+	@CacheEvict(value = {"product", "productList"}, allEntries = true)
+	public void updateProduct(Product product) {
+		productStore.store(product);
+	}
+
+	@CacheEvict(value = {"product", "productList"}, allEntries = true)
+	public void deleteProduct(Long productId) {
+		productDeleter.delete(productId);
+	}
+
 }
