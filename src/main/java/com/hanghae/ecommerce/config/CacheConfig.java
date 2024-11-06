@@ -34,7 +34,7 @@ public class CacheConfig {
 			.registerModule(new JavaTimeModule())
 			.activateDefaultTyping(
 				BasicPolymorphicTypeValidator.builder().allowIfBaseType(Object.class).build(),
-				ObjectMapper.DefaultTyping.NON_FINAL,
+				ObjectMapper.DefaultTyping.EVERYTHING,
 				JsonTypeInfo.As.PROPERTY
 			)
 			.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -46,6 +46,7 @@ public class CacheConfig {
 			.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.string()))
 			.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer));
 
+		// 캐시별로 TTL 설정
 		Map<String, RedisCacheConfiguration> cacheConfigurations = new HashMap<>();
 		cacheConfigurations.put("productList", defaultConfig);
 		cacheConfigurations.put("product", defaultConfig);
