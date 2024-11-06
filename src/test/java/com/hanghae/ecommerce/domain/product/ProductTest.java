@@ -15,7 +15,7 @@ class ProductTest {
 		Long stock = 50L;
 
 		// when
-		Product product = new Product(name, price, stock);
+		Product product = Product.toEntity(name, price, stock);
 
 		// then
 		assertEquals(name, product.getName());
@@ -26,7 +26,7 @@ class ProductTest {
 	@Test
 	void checkStock_재고부족() {
 		// given
-		Product product = new Product("Test Product", 1000L, 5L);
+		Product product = Product.toEntity("Test Product", 1000L, 5L);
 
 		// when & then
 		assertThrows(OutOfStockException.class, () -> product.checkStock(10L));
@@ -35,7 +35,7 @@ class ProductTest {
 	@Test
 	void reduceStock() {
 		// given
-		Product product = new Product("Test Product", 1000L, 10L);
+		Product product = Product.toEntity("Test Product", 1000L, 10L);
 
 		// when
 		product.reduceStock(5L);
@@ -47,7 +47,7 @@ class ProductTest {
 	@Test
 	void reduceStock_재고부족_차감실패() {
 		// given
-		Product product = new Product("Test Product", 1000L, 5L);
+		Product product = Product.toEntity("Test Product", 1000L, 5L);
 
 		// when & then
 		assertThrows(OutOfStockException.class, () -> product.reduceStock(6L));
