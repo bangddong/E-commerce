@@ -1,6 +1,6 @@
 package com.hanghae.ecommerce.interfaces.order;
 
-import com.hanghae.ecommerce.application.order.OrderFacade;
+import com.hanghae.ecommerce.application.OrderFacade;
 import com.hanghae.ecommerce.common.response.CommonResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

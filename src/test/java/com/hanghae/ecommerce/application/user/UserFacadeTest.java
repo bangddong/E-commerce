@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.hanghae.ecommerce.application.UserFacade;
 import com.hanghae.ecommerce.domain.user.UserCommand;
 import com.hanghae.ecommerce.domain.user.UserInfo;
 import com.hanghae.ecommerce.domain.user.UserService;

@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.hanghae.ecommerce.application.ProductFacade;
 import com.hanghae.ecommerce.domain.order.OrderService;
 import com.hanghae.ecommerce.domain.product.ProductInfo;
 import com.hanghae.ecommerce.domain.product.ProductService;

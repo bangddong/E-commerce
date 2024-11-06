@@ -3,14 +3,13 @@ package com.hanghae.ecommerce.application.cart;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.hanghae.ecommerce.application.CartFacade;
 import com.hanghae.ecommerce.domain.cart.CartCommand;
 import com.hanghae.ecommerce.domain.cart.CartInfo;
 import com.hanghae.ecommerce.domain.cart.CartService;

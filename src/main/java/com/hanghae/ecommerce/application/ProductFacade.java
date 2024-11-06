@@ -1,4 +1,4 @@
-package com.hanghae.ecommerce.application.product;
+package com.hanghae.ecommerce.application;
 
 import java.util.List;
 
