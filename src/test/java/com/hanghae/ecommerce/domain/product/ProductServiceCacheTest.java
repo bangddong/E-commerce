@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.LongStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cache.CacheManager;
+import org.springframework.util.StopWatch;
 
 @SpringBootTest
 class ProductServiceCacheTest {
@@ -24,6 +26,8 @@ class ProductServiceCacheTest {
 
 	@Autowired
 	private CacheManager cacheManager;
+
+	private final List<Long> productIds = LongStream.rangeClosed(1, 1000).boxed().toList();
 
 	@BeforeEach
 	void setUp() {
@@ -86,6 +90,28 @@ class ProductServiceCacheTest {
 
 		productService.getProduct(productId);
 		verify(productReader, times(2)).getProduct(productId);
+	}
+
+	@Test
+	void testPerformanceCache() {
+		StopWatch stopWatch = new StopWatch();
+
+		Product mockProduct = mock(Product.class);
+		when(productReader.getProduct(any())).thenReturn(mockProduct);
+
+		stopWatch.start("Without Cache");
+		for (Long productId : productIds) {
+			productService.getProduct(productId);
+		}
+		stopWatch.stop();
+
+		stopWatch.start("With Cache");
+		for (Long productId : productIds) {
+			productService.getProduct(productId);
+		}
+		stopWatch.stop();
+
+		System.out.println(stopWatch.prettyPrint());
 	}
 
 }
