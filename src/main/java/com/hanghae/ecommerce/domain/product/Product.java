@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +27,8 @@ public class Product extends AbstractEntity {
 	private Long price;
 	private Long stock;
 
-	public Product(String name, Long price, Long stock) {
+	@Builder
+	private Product(String name, Long price, Long stock) {
 		if (name == null) throw new InvalidParamException("Product.name");
 		if (price == null) throw new InvalidParamException("Product.price");
 		if (stock == null) throw new InvalidParamException("Product.stock");
@@ -35,6 +37,15 @@ public class Product extends AbstractEntity {
 		this.price = price;
 		this.stock = stock;
 	}
+
+	public static Product toEntity(String name, Long price, Long stock) {
+		return Product.builder()
+			.name(name)
+			.price(price)
+			.stock(stock)
+			.build();
+	}
+
 	public void checkStock(Long amount) {
 		if (amount == null) throw new InvalidParamException("Product.stock");
 		if (stock < amount) throw new OutOfStockException();

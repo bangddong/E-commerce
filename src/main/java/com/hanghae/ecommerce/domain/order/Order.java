@@ -36,7 +36,7 @@ public class Order extends AbstractEntity {
 	}
 
 	@Builder
-	public Order(Long userId, Long totalAmount) {
+	private Order(Long userId, Long totalAmount) {
 		if (userId == null) throw new InvalidParamException("Order.userId");
 		if (totalAmount == null) throw new InvalidParamException("Order.totalAmount");
 

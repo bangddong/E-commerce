@@ -2,6 +2,7 @@ package com.hanghae.ecommerce.domain.order;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Cacheable(value = "topSellingProducts", cacheManager = "redisCacheManager")
 	@Transactional(readOnly = true)
 	public List<Long> getTopSelling() {
 		return orderItemReader.getTopSelling();
