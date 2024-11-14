@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "products")
+@Table(name = "products", indexes = {
+	@Index(name = "idx_product_price", columnList = "price"),
+	@Index(name = "idx_product_stock", columnList = "stock")
+})
 public class Product extends AbstractEntity {
 
 	@Id
