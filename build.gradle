@@ -37,6 +37,9 @@ dependencies {
 
     // redisson
     implementation 'org.redisson:redisson-spring-boot-starter:3.38.0'
+
+    // Mariadb
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
 }
 
 tasks.named('test') {
