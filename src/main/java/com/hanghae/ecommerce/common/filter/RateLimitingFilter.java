@@ -23,15 +23,15 @@ public class RateLimitingFilter implements Filter {
 
 		String clientIp = request.getRemoteAddr();
 
-		RateLimiter rateLimiter = rateLimiters.computeIfAbsent(
-			clientIp, k -> new RateLimiter(5, TimeUnit.SECONDS)
-		);
-
-		if (rateLimiter.isLimitExceeded()) {
-			httpServletResponse.setStatus(429);
-			httpServletResponse.getWriter().write("지금은 처리할 수 없습니다. 잠시후 재시도 해주세요.");
-			return;
-		}
+		// RateLimiter rateLimiter = rateLimiters.computeIfAbsent(
+		// 	clientIp, k -> new RateLimiter(10, TimeUnit.SECONDS)
+		// );
+		//
+		// if (rateLimiter.isLimitExceeded()) {
+		// 	httpServletResponse.setStatus(429);
+		// 	httpServletResponse.getWriter().write("지금은 처리할 수 없습니다. 잠시후 재시도 해주세요.");
+		// 	return;
+		// }
 
 		// 다음 필터로 요청을 전달
 		chain.doFilter(request, response);
